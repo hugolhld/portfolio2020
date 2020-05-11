@@ -154,7 +154,7 @@ const loop = () =>
     window.requestAnimationFrame(loop)
 
     model.loop()
-    controls.update
+    // controls.update
 
     // console.log(model.animations)
 
@@ -164,7 +164,15 @@ const loop = () =>
 loop()
 
 // model.model.mixer.addEventListener('finished', console.log('h'))
-window.addEventListener('keypress', () => 
+window.addEventListener('keypress', (_event) => 
 {
-    model.test()
+    if(_event.key == 'q')
+    {
+        model.changeAnimation('back')
+    }
+
+    // if(_event.key == 'z')
+    // {
+
+    // }
 })
