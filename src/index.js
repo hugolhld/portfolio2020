@@ -156,7 +156,15 @@ const loop = () =>
     model.loop()
     controls.update
 
+    // console.log(model.animations)
+
     // Render
     renderer.render(scene, camera)
 }
 loop()
+
+// model.model.mixer.addEventListener('finished', console.log('h'))
+window.addEventListener('keypress', () => 
+{
+    model.test()
+})
