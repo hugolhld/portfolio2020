@@ -68,10 +68,14 @@ nav
             &:nth-child(4)
                 padding-right 0
 main
-    display none
+    display block
     z-index 1
-    
+    section
+        width 100vw
+        height 100vh
 
+.projects
+    display none
 article 
     width 100vw
     height 100vh
@@ -122,6 +126,42 @@ article
                 &:hover
                     background #fff
                     color #000
+
+.contact
+    display flex
+    align-items center
+    justify-content center
+    color #fff
+    .contact__content
+        width 90%
+        display flex
+        justify-content space-between
+        .content__left
+            width 100%
+            padding-right 5%
+        .content__right
+            width 100%
+            padding-left 5%
+            input
+                width 100%
+                padding 2%
+                font-size 1em
+                background #000
+                border 1px solid #fff
+                color #fff
+                &:focus
+                    // border none
+                    outline none
+            textarea
+                width 100%
+                padding .8%
+                font-size 1em
+                background #000
+                border 1px solid #fff
+                color #fff
+                resize none
+            h2
+                margin-bottom 2%
 
 
 .active
