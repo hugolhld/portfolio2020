@@ -8,35 +8,50 @@
     font-style normal
     src url(../fonts/TRY_Clother-Regular.ttf)
 
-*
-    margin 0
-    padding 0
+@font-face 
+    font-family ColtherLight 
+    font-style normal
+    src url(../fonts/TRY_Clother-Light.ttf)
+
+// *
+//     margin 0
+//     padding 0
 
 
 html
 body
     // position fixed
-    top 0
-    left 0
+    margin 0
+    padding 0
+    // top 0
+    // left 0
     width 100%
     height 100%
     overflow hidden
+    font-family ColtherRegular
+    background #000
+    scroll-behavior smooth
+
+canvas
+    width 100%
+    z-index 5
 
 header
     width 100vw
-    // position fixed
+    position fixed
+    border-bottom 1px solid #fff
+    background #000
+    z-index: 10
 
 nav
-    // width 100%
-    padding 0 5%
+    width 90%
+    margin 0 auto
+    // padding 0 5%
     display flex
     justify-content space-between
     align-items center
     font-family ColtherRegular
-    border-bottom 1px solid #fff
-    background #000
     color #FFF
-    z-index 10
     h1
         span
             font-family ColtherBold
@@ -50,3 +65,70 @@ nav
         list-style none
         li
             padding /* 10px */ 20px
+            &:nth-child(4)
+                padding-right 0
+main
+    display none
+    z-index 1
+    
+
+article 
+    width 100vw
+    height 100vh
+    display flex
+    align-items center
+    justify-content center
+    color #fff
+    background #000
+    .projects__content
+        width 90%
+        display flex
+        align-items center
+        justify-content space-between
+        .content__left
+            width 70%
+            display flex
+            align-items center
+            img
+                width 100%
+                height 100%
+        .content__bar
+            width .5%
+            height 50vh
+            background #fff
+            margin 0 5%
+        .content__right
+            width 70%
+            display flex
+            flex-direction column
+            justify-content space-between
+            h1
+                margin-top 0
+                margin-bottom 1%
+                font-family ColtherBold
+                font-size 2em
+            small
+                margin-bottom 2%
+                font-family ColtherLight
+            p
+                font-family ColtherRegular
+            a
+                width max-content
+                color #fff
+                text-decoration none
+                padding 15px
+                border 1px solid #fff
+                transition .3s
+                &:hover
+                    background #fff
+                    color #000
+
+
+.active
+    display block
+    animation opacity 3s
+
+@keyframes opacity {
+    from {transform: translateX(-100vw)}
+    to {transform: translateX(0)}
+    }

@@ -3,9 +3,13 @@ import * as THREE from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Model from './js/model.js'
+import PhotoTest from './images/test.png'
 // import Punch from '../static/model/Punching.fbx'
 // import Character from '../static/model/character.fbx'
 
+const photo = new Image()
+photo.src = PhotoTest
+document.querySelector('.test').appendChild(photo)
 
 /**
  * Sizes
@@ -38,72 +42,6 @@ const scene = new THREE.Scene()
 
 const model = new Model
 scene.add(model.group)
-
-// const dummy = new THREE.Mesh(
-//     new THREE.SphereGeometry(1),
-//     new THREE.MeshNormalMaterial()
-// )
-
-// scene.add(dummy)
-
-// const loader = new FBXLoader()
-// let model 
-// let mixer
-// let bigTest = 0
-// let clock = new THREE.Clock()
-// let root
-// // let animationsTab = [Character, Belly, Punch]
-
-// loader.load(
-//     './model/SambaCharacter.fbx',
-//     (_fbx) => {
-//         console.log(_fbx)
-//         model = _fbx
-//         model.scale.set(0.3,0.3,0.3)
-//         model.position.y = -20
-        
-//         mixer = new THREE.AnimationMixer(model) 
-//         // root = mixer.getRoot()
-//         /* idle =  */mixer.clipAction(model.animations[bigTest]).play()
-//         // idle.play()
-//         // addAnim(loader)
-//         scene.add(model)
-//     }
-// )
-
-// const addAnim = (loader) =>
-// {
-//     let animation = animationsTab.pop()
-
-//     loader.load(animation, model =>
-//         {
-//             model[animation] = model.animation[0]
-
-//             if(animationsTab.length > 0)
-//             {
-//                 addAnim(loader)
-//             }
-//             // else
-//             // {
-//             //     animationsTab = null
-
-//             // }
-//         })
-// }
-
-// document.querySelector('body').addEventListener('click', () => 
-// {
-//     mixer.stopAllAction()
-//     // /* idle =  */mixer.clipAction(Belly, root).play()
-//     // idle.play()
-
-// })
-
-// document.querySelector('body').addEventListener('keypress', () =>
-// {
-//     mixer.stopAllAction()
-//     mixer.clipAction(model.animations[0]).play()
-// })
 
 /** 
  * Light
@@ -163,16 +101,37 @@ const loop = () =>
 }
 loop()
 
-// model.model.mixer.addEventListener('finished', console.log('h'))
-window.addEventListener('keypress', (_event) => 
+// window.addEventListener('keypress', (_event) => 
+// {
+//     if(_event.key == 'q')
+//     {
+//         model.changeAnimation('back')
+//     }
+
+//     // if(_event.key == 'z')
+//     // {
+
+//     // }
+// })
+
+const openDiv = (button, key, divToOpen, animation, duration) =>
 {
-    if(_event.key == 'q')
+    button.addEventListener('click', () =>
     {
-        model.changeAnimation('back')
-    }
+        divToOpen.classList.add('active')
+        console.log(duration)
+    })
 
-    // if(_event.key == 'z')
-    // {
+    window.addEventListener('keypress', (_event) =>
+    {
+        if(_event.key == key)
+        {
+            model.changeAnimation(animation)
+            setTimeout(() =>
+                divToOpen.classList.add('active')
+            ,model.model.duration * 1000)
+        }
+    })
+}
 
-    // }
-})
+openDiv(document.querySelector('.nav__left'), 'q', document.querySelector('main'), 'back', model.duration)

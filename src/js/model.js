@@ -14,10 +14,10 @@ export default class Model
     {
         this.group = new THREE.Group()
         this.model= {}
+        this.duration = 'kk'
         this.clock = new THREE.Clock()
         this.animationsArray = [Punch, LookingAround, Backflip]
         this.init()
-        // this.test()
     }
 
     init()
@@ -46,7 +46,7 @@ export default class Model
                 // this.mixer.clipAction(this.model.animations[0], this.root).play()
 
                 // console.log(this.mixer)
-                // console.log(this.model.animations)
+                console.log(this.model.object.animations)
                 this.addAnimations(this.loader)
                 this.group.add(this.model.object)
             }
@@ -63,8 +63,7 @@ export default class Model
             model =>
             {
                 this.model[animation] = model.animations[0]
-
-                console.log(this.animations);
+                console.log(model)
                 if(this.animationsArray.length > 0) this.addAnimations(loader)
                 else
                 {
@@ -82,7 +81,7 @@ export default class Model
 
         const animationSelection = this.model[animation]
         // console.log(this.model.mixer);
-
+        this.model.duration = animationSelection.duration
         const action = this.model.mixer.clipAction(animationSelection, this.model.root)
 
         this.model.mixer.stopAllAction()
@@ -100,10 +99,16 @@ export default class Model
 
             this.action = Backflip
         }
-        // setTimeout(() =>
-        // this.action = animation
-        // ,5000)
-        this.model.mixer.addEventListener('finished', () => this.action = LookingAround)
+        console.log(Backflip.duration)
+        setTimeout(() =>
+            this.action = LookingAround
+        ,this.model.duration * 1000)
+        // this.model.mixer.addEventListener('finished', (e) => 
+        // {
+        //     console.log(e)
+        //     this.action = LookingAround
+        // })
+        // return this.model.duration
     }
 
     loop()
