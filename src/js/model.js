@@ -14,7 +14,7 @@ export default class Model
     {
         this.group = new THREE.Group()
         this.model= {}
-        this.duration = 'kk'
+        this.duration
         this.clock = new THREE.Clock()
         this.animationsArray = [Punch, LookingAround, Backflip]
         this.init()
@@ -40,13 +40,7 @@ export default class Model
                 this.model.object.position.y = -20
 
                 this.model.dance = this.model.object.animations[0]
-                // console.log(this.model);
 
-                // this.animations.mixer = new THREE.AnimationMixer(this.model)
-                // this.mixer.clipAction(this.model.animations[0], this.root).play()
-
-                // console.log(this.mixer)
-                console.log(this.model.object.animations)
                 this.addAnimations(this.loader)
                 this.group.add(this.model.object)
             }
@@ -80,7 +74,6 @@ export default class Model
         if(this.model.action === animation) return
 
         const animationSelection = this.model[animation]
-        // console.log(this.model.mixer);
         this.model.duration = animationSelection.duration
         const action = this.model.mixer.clipAction(animationSelection, this.model.root)
 
@@ -99,16 +92,10 @@ export default class Model
 
             this.action = Backflip
         }
-        console.log(Backflip.duration)
+
         setTimeout(() =>
             this.action = LookingAround
         ,this.model.duration * 1000)
-        // this.model.mixer.addEventListener('finished', (e) => 
-        // {
-        //     console.log(e)
-        //     this.action = LookingAround
-        // })
-        // return this.model.duration
     }
 
     loop()
@@ -117,9 +104,5 @@ export default class Model
 
         if (this.model.mixer!=undefined) this.model.mixer.update(dt)
 
-        // if (this.mixer)
-        // {
-        //     this.mixer.update(this.clock.getDelta())
-        // }
     }
 }

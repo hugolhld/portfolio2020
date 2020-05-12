@@ -1,12 +1,8 @@
 import './style/main.styl'
 import * as THREE from 'three'
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Model from './js/model.js'
 import PhotoTest from './images/test.png'
-// import Punch from '../static/model/Punching.fbx'
-// import Character from '../static/model/character.fbx'
-
 const photo = new Image()
 photo.src = PhotoTest
 document.querySelector('.test').appendChild(photo)

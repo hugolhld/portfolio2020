@@ -13,18 +13,10 @@
     font-style normal
     src url(../fonts/TRY_Clother-Light.ttf)
 
-// *
-//     margin 0
-//     padding 0
-
-
 html
 body
-    // position fixed
     margin 0
     padding 0
-    // top 0
-    // left 0
     width 100%
     height 100%
     overflow hidden
@@ -36,37 +28,76 @@ canvas
     width 100%
     z-index 5
 
+.loader
+    display flex
+    width 100vw
+    height 100vh
+    color white
+    flex-direction column
+    justify-content center
+    align-items center
+    span
+        padding 5% 0
+        font-size 2em
+    .loader__bar
+        width 60%
+        height 1%
+        background #fff
+        animation loadAnimation 5s
+        transform-origin 0.0
+
 header
+    display none
     width 100vw
     position fixed
     border-bottom 1px solid #fff
     background #000
     z-index: 10
-
-nav
-    width 90%
-    margin 0 auto
-    // padding 0 5%
-    display flex
-    justify-content space-between
-    align-items center
-    font-family ColtherRegular
-    color #FFF
-    h1
-        span
-            font-family ColtherBold
-            color #000000
-            // border 2px solid #fff
-            -webkit-text-stroke: 1px #fff
-    ul
+    nav
+        width 90%
+        margin 0 auto
+        // padding 0 5%
         display flex
         justify-content space-between
         align-items center
-        list-style none
-        li
-            padding /* 10px */ 20px
-            &:nth-child(4)
-                padding-right 0
+        font-family ColtherRegular
+        color #FFF
+        a
+            color #fff
+            text-decoration none
+        button
+            position relative
+            -webkit-appearance none
+            background none
+            font-size 1em
+            border none
+            color #fff
+            cursor pointer
+            &:hover:after
+                content ' '
+                position absolute
+                width 120%
+                height .2vw
+                top 100%
+                left -10%
+                background #fff
+                animation underlineAnimation .5s
+        h1
+            font-family ColtherBold
+            span
+                font-family ColtherBold
+                color #000000
+                -webkit-text-stroke 1px #fff
+        ul
+            display flex
+            justify-content space-between
+            align-items center
+            list-style none
+            li
+                padding 20px
+                &:nth-child(4)
+                    padding-right 0
+
 main
     display block
     z-index 1
@@ -128,40 +159,64 @@ article
                     color #000
 
 .contact
-    display flex
+    display none
+    // display flex
     align-items center
     justify-content center
     color #fff
     .contact__content
         width 90%
         display flex
-        justify-content space-between
+        // justify-content space-between
+        margin-top 5%
         .content__left
             width 100%
             padding-right 5%
+            p
+                margin-block-start auto
         .content__right
             width 100%
             padding-left 5%
             input
-                width 100%
+                width -webkit-fill-available
                 padding 2%
                 font-size 1em
                 background #000
                 border 1px solid #fff
                 color #fff
                 &:focus
-                    // border none
                     outline none
             textarea
-                width 100%
-                padding .8%
+                width -webkit-fill-available
+                padding 2%
                 font-size 1em
                 background #000
                 border 1px solid #fff
                 color #fff
                 resize none
+                &:focus
+                    outline none
+            button
+                width 100%
+                padding 2%
+                margin-top 5%
+                font-size 1em
+                color #000
+                background #fff
+                text-transform uppercase
+                transition .5s
+                -webkit-appearance none
+                cursor pointer
+                &:hover
+                    background #000
+                    color #fff
+                    transition .5s
             h2
                 margin-bottom 2%
+                &:nth-child(1)
+                    margin-block-start auto
+
+
 
 
 .active
@@ -171,4 +226,16 @@ article
 @keyframes opacity {
     from {transform: translateX(-100vw)}
     to {transform: translateX(0)}
+    }
+
+@keyframes underlineAnimation{
+    from {width: 0%}
+    to {width: 120%}
+    }
+
+@keyframes loadAnimation{
+    0% {transform: scaleX(0)}
+    60% {transform: scaleX(.3)}
+    90% {transform: scaleX(.35)}
+    100% {transform: scaleX(1)}
     }

@@ -6,17 +6,23 @@
     <title>14 - Donuts</title>
 </head>
 <body>
+    <div class="loader">
+        <span>100%</span>
+        <div class="loader__bar"></div>
+    </div>
     <header>
         <nav>
             <div class="nav__left">
-                <h1>HUGO <span>LHERNOULD</span></h1>
+                <a href="/">
+                    <h1>HUGO <span>LHERNOULD</span></h1>
+                </a>
             </div>
             <div class="nav__right">
                 <ul>
-                    <li>Accueil</li>
-                    <li>Projets</li>
-                    <li>Informations</li>
-                    <li>Contact</li>
+                    <li><button>Accueil</button></li>
+                    <li><button>Projets</button></li>
+                    <li><button>À propos de moi</button></li>
+                    <li><button>Contact</button></li>
                 </ul>
             </div>
         </nav>
@@ -73,21 +79,27 @@
                 </div>
             </article>
         </section>
+        <!-- <section class="about">
+            <div class="about__content">
+
+            </div>
+        </section> -->
         <section class="contact">
             <div class="contact__content">
                 <div class="content__left">
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae unde architecto ipsam quaerat aliquam facere pariatur neque! Aperiam ipsum delectus fugiat nihil repellendus sit repellat fugit temporibus similique? Voluptatum, consequuntur.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae unde architecto ipsam quaerat aliquam facere pariatur neque! Aperiam ipsum delectus fugiat nihil repellendus sit repellat fugit temporibus similique? Voluptatum, consequuntur.</p>
                 </div>
                 <div class="content__right">
-                    <form action="post">
+                    <form action="mail.php" method="post">
                         <h2>Votre nom</h2>
-                        <input type="text" placeholder="Hugo Lhernould">
+                        <input type="text" name="name" placeholder="Hugo Lhernould">
                         <h2>Votre mail</h2>
-                        <input type="email" name="" placeholder="hugo.lhernould@gmail.com">
+                        <input type="email" name="mail" placeholder="hugo.lhernould@gmail.com">
                         <h2>Sujet du message</h2>
-                        <input type="text" placeholder="Stage été 2020">
+                        <input type="text" name="subject" placeholder="Stage été 2020">
                         <h2>Votre message</h2>
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Bonjour, Hugo ..."></textarea>
+                        <textarea name="message" id="" cols="30" rows="5" placeholder="Bonjour, Hugo ..."></textarea>
+                        <button>Envoyer</button>
                     </form>
                 </div>
             </div>
