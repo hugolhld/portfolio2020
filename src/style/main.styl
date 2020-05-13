@@ -29,6 +29,7 @@ canvas
     z-index 5
 
 .loader
+    // display none
     display flex
     width 100vw
     height 100vh
@@ -43,11 +44,11 @@ canvas
         width 60%
         height 1%
         background #fff
-        animation loadAnimation 5s
+        // animation loadAnimation 5s
         transform-origin 0.0
 
 header
-    display none
+    display block
     width 100vw
     position fixed
     border-bottom 1px solid #fff
@@ -103,62 +104,118 @@ main
     z-index 1
     section
         width 100vw
-        height 100vh
+        // height 100vh
 
-.projects
-    display none
-article 
-    width 100vw
+.instruction
     height 100vh
+    position absolute
+    background #00000090
     display flex
     align-items center
     justify-content center
-    color #fff
-    background #000
-    .projects__content
-        width 90%
+    z-index 20
+    .instruction__content
+        color #fff
+        background #000
+        border 1px solid #fff
+        padding 5% 10%
+        // animation test .7s
+        // animation-delay 5s
+        h2
+            text-align center
+            margin-top 0
+        table
+            width max-content
+            padding 10% 0
+            margin 0 auto
+            tbody
+                width 100%
+                display flex
+                flex-direction column
+                tr
+                    padding 5% 0
+                    th
+                        div
+                            width 3vw
+                            height 3vw
+                            display flex
+                            justify-content center
+                            align-items center
+                            border 1px solid #fff
+                    td
+                        width 100%
+                        padding-left 20%
+        button
+            width 100%
+            padding 5%
+            background #fff
+            color #000
+            font-size 1em
+            -webkit-appearance none
+            transition .3s
+            cursor pointer
+            &:focus
+                outline none
+            &:hover
+                background #000
+                color #fff
+                transition .3s
+
+.projects
+    display none
+    article 
+        width 100vw
+        height 100vh
         display flex
         align-items center
-        justify-content space-between
-        .content__left
-            width 70%
+        justify-content center
+        color #fff
+        background #000
+        .projects__content
+            width 90%
             display flex
             align-items center
-            img
-                width 100%
-                height 100%
-        .content__bar
-            width .5%
-            height 50vh
-            background #fff
-            margin 0 5%
-        .content__right
-            width 70%
-            display flex
-            flex-direction column
             justify-content space-between
-            h1
-                margin-top 0
-                margin-bottom 1%
-                font-family ColtherBold
-                font-size 2em
-            small
-                margin-bottom 2%
-                font-family ColtherLight
-            p
-                font-family ColtherRegular
-            a
-                width max-content
-                color #fff
-                text-decoration none
-                padding 15px
-                border 1px solid #fff
-                transition .3s
-                &:hover
-                    background #fff
-                    color #000
+            .content__left
+                width 70%
+                display flex
+                align-items center
+                img
+                    width 100%
+                    height 100%
+            .content__bar
+                width .5%
+                height 50vh
+                background #fff
+                margin 0 5%
+            .content__right
+                width 70%
+                display flex
+                flex-direction column
+                justify-content space-between
+                h1
+                    margin-top 0
+                    margin-bottom 1%
+                    font-family ColtherBold
+                    font-size 2em
+                small
+                    margin-bottom 2%
+                    font-family ColtherLight
+                p
+                    font-family ColtherRegular
+                a
+                    width max-content
+                    color #fff
+                    text-decoration none
+                    padding 15px
+                    border 1px solid #fff
+                    transition .3s
+                    &:hover
+                        background #fff
+                        color #000
 
 .contact
+    height 100vh
     display none
     // display flex
     align-items center
@@ -233,9 +290,15 @@ article
     to {transform: scaleX(1)}
     }
 
-@keyframes loadAnimation{
-    0% {transform: scaleX(0)}
-    60% {transform: scaleX(.3)}
-    90% {transform: scaleX(.35)}
-    100% {transform: scaleX(1)}
+@keyframes test{
+    0% {transform: scaleY(1)}
+    50% {transform: scaleY(0) scaleX(1) }
+    100% {transform: scaleY(0.001) scaleX(3); background: #fff}
     }
+
+// @keyframes loadAnimation{
+//     0% {transform: scaleX(0)}
+//     60% {transform: scaleX(.3)}
+//     90% {transform: scaleX(.35)}
+//     100% {transform: scaleX(1)}
+//     }

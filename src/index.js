@@ -8,6 +8,44 @@ photo.src = PhotoTest
 document.querySelector('.test').appendChild(photo)
 
 /**
+ * Loader
+ */
+
+let pourcentValue = 0
+const pourcentDiv = document.querySelector('.js-pourcent')
+const pourcentBar = document.querySelector('.js-pourcent-bar')
+
+let int =  setInterval(()=>
+{
+    pourcentValue++
+    pourcentDiv.innerText = pourcentValue + '%'
+    pourcentBar.style.transform = `scaleX(${pourcentValue / 100})`
+    if(pourcentValue >= 100)
+    {
+        document.querySelector('.loader').style.display = 'none'
+        // this.hiddenoadingScreen()
+        clearInterval(int);
+    }
+},10)
+
+/**
+ * Close instruction
+ */
+
+const instructionDiv = document.querySelector('.instruction')
+const instructionContent = document.querySelector('.instruction__content')
+const instructionButton = document.querySelector('.instruction__content button')
+
+instructionButton.addEventListener('click', () =>
+{
+    instructionContent.style.animation = 'test .7s'
+    instructionContent.addEventListener('animationend', () =>
+    {
+        instructionDiv.style.display = 'none'
+    })
+})
+
+/**
  * Sizes
  */
 const sizes = {}
@@ -110,12 +148,30 @@ loop()
 //     // }
 // })
 
-const openDiv = (button, key, divToOpen, animation, duration) =>
+const openDiv = (button, key, divToOpen, animation, duration, display) =>
 {
+    const closeActiveContent = () => 
+    {
+        if(divToOpen === false)
+        {
+            let activeContent = document.querySelectorAll('.active')
+            for(const active of activeContent)
+            {
+                active.classList.remove('active')
+                active.style.display = 'none'
+            }
+        }
+    }
+
     button.addEventListener('click', () =>
     {
-        divToOpen.classList.add('active')
-        console.log(duration)
+        if(divToOpen != false)
+        {
+            divToOpen.classList.add('active')
+            divToOpen.style.display = display
+        }
+        // console.log(duration)
+        closeActiveContent()
     })
 
     window.addEventListener('keypress', (_event) =>
@@ -123,11 +179,21 @@ const openDiv = (button, key, divToOpen, animation, duration) =>
         if(_event.key == key)
         {
             model.changeAnimation(animation)
-            setTimeout(() =>
-                divToOpen.classList.add('active')
-            ,model.model.duration * 1000)
+            if(divToOpen != false)
+            {
+                setTimeout(() =>
+                {
+                    divToOpen.classList.add('active')
+                    divToOpen.style.display = display
+                },model.model.duration * 1000)
+            }
+            closeActiveContent()
         }
     })
 }
 
-openDiv(document.querySelector('.nav__left'), 'q', document.querySelector('main'), 'back', model.duration)
+openDiv(document.querySelector('.js-projects'), 'q', document.querySelector('.js-projects-content'), 'back', model.duration, 'block')
+openDiv(document.querySelector('.js-contact'), 'd', document.querySelector('.js-contact-content'), 'dance', model.duration, 'flex')
+openDiv(document.querySelector('.js-home'), 'z', false, 'back', model.duration, false)
+// openDiv(document.querySelector('.js-about'), 's', document.querySelector('.js-contact-content'), 'back', model.duration)
+console.log(document.querySelector('.js-contact-content'))

@@ -7,8 +7,8 @@
 </head>
 <body>
     <div class="loader">
-        <span>100%</span>
-        <div class="loader__bar"></div>
+        <span class="js-pourcent"></span>
+        <div class="loader__bar js-pourcent-bar"></div>
     </div>
     <header>
         <nav>
@@ -19,16 +19,56 @@
             </div>
             <div class="nav__right">
                 <ul>
-                    <li><button>Accueil</button></li>
-                    <li><button>Projets</button></li>
-                    <li><button>À propos de moi</button></li>
-                    <li><button>Contact</button></li>
+                    <li class="js-home"><button>Accueil</button></li>
+                    <li class="js-projects"><button>Projets</button></li>
+                    <li class="js-about"><button>À propos de moi</button></li>
+                    <li class="js-contact"><button>Contact</button></li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
-        <section class="projects">
+        <section class="instruction">
+            <article class="instruction__content">
+                <h2>Pour une expérience optimale</h2>
+                <table>
+                    <tr>
+                        <th>
+                            <div>
+                                Z
+                            </div>
+                        </th>
+                        <td>Retourner à l'accueil</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div>
+                                Q
+                            </div>
+                        </th>
+                        <td>Découvrir mes projets</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div>
+                                S
+                            </div>
+                        </th>
+                        <td>À propos de moi</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div>
+                                D
+                            </div>
+                        </th>
+                        <td>Retourner à l'accueil</td>
+                    </tr>
+                </table>
+                <button>J'ai compris</button>
+            </article>
+        </section>
+        <section class="projects js-projects-content">
             <article>
                 <div class="projects__content">
                     <div class="content__left test">
@@ -79,12 +119,12 @@
                 </div>
             </article>
         </section>
-        <!-- <section class="about">
+        <!-- <section class="about js-about-content">
             <div class="about__content">
 
             </div>
         </section> -->
-        <section class="contact">
+        <section class="contact js-contact-content">
             <div class="contact__content">
                 <div class="content__left">
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae unde architecto ipsam quaerat aliquam facere pariatur neque! Aperiam ipsum delectus fugiat nihil repellendus sit repellat fugit temporibus similique? Voluptatum, consequuntur.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae unde architecto ipsam quaerat aliquam facere pariatur neque! Aperiam ipsum delectus fugiat nihil repellendus sit repellat fugit temporibus similique? Voluptatum, consequuntur.</p>

@@ -89,8 +89,12 @@ export default class Model
     {
         if(animation == 'back')
         {
-
             this.action = Backflip
+        }
+        
+        if(animation == 'dance')
+        {
+            this.action = 'dance'
         }
 
         setTimeout(() =>
