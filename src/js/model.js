@@ -1,9 +1,9 @@
 import * as THREE from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import Belly from '../model/SambaCharacter.fbx'
 import Punch from '../model/Punching.fbx'
 import LookingAround from '../model/looking.fbx'
-import Test from '../model/test.fbx'
 import Backflip from '../model/Backflip.fbx'
 
 
@@ -15,6 +15,7 @@ export default class Model
         this.group = new THREE.Group()
         this.model= {}
         this.duration
+        this.person = test
         this.clock = new THREE.Clock()
         this.animationsArray = [Punch, LookingAround, Backflip]
         this.init()
@@ -23,6 +24,7 @@ export default class Model
     init()
     {
         this.loader = new FBXLoader()
+        this.loaderTest = new GLTFLoader()
 
         this.loader.load(
             Belly,
@@ -36,8 +38,15 @@ export default class Model
 
                 this.model.root = this.model.mixer.getRoot()
 
-                this.model.object.scale.set(0.3,0.3,0.3)
-                this.model.object.position.y = -20
+                _fbx.traverse( child => {
+                    if (child.isMesh) {
+                        child.castShadow = true
+                        child.receiveShadow = true
+                    }
+                } )
+
+                this.model.object.scale.set(0.05,0.05,0.05)
+                this.model.object.position.y = -7
 
                 this.model.dance = this.model.object.animations[0]
 

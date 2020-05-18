@@ -13,7 +13,7 @@ module.exports = {
         host: '0.0.0.0',
         useLocalIp: true
     },
-    entry:  path.resolve(__dirname, '../src/index.js'),
+    entry:  path.resolve(__dirname, '../src/test.js'),
     output:
     {
         filename: 'bundle.[hash].js',

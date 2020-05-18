@@ -2,7 +2,7 @@
   "name": "11-webpack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "test.js",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.8.6",
