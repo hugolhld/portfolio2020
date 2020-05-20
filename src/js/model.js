@@ -15,7 +15,7 @@ export default class Model
         this.group = new THREE.Group()
         this.model= {}
         this.duration
-        this.person = test
+        this.person
         this.clock = new THREE.Clock()
         this.animationsArray = [Punch, LookingAround, Backflip]
         this.init()
