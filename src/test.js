@@ -1,9 +1,8 @@
 import './style/main.styl'
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Model from './js/model.js'
 import PhotoTest from './images/test.png'
-import Loader from './js/Loader.js'
+// import Loader from './js/Loader.js'
 
 class Museum {
     constructor(){
@@ -26,29 +25,32 @@ class Museum {
         this.container.style.height = '100%'
         document.body.appendChild( this.container ) */
 
-		this.options = {
-            assets:[
-            ],
-			oncomplete: () => {
-                this.init()
-                this.loop()
-                this.openDiv(document.querySelector('.js-projects'), 'q', document.querySelector('.js-projects-content'), 'back', this.model.duration, 'block')
-                this.openDiv(document.querySelector('.js-contact'), 'd', document.querySelector('.js-contact-content'), 'dance', this.model.duration, 'flex')
-                this.openDiv(document.querySelector('.js-home'), 'z', false, 'back', this.model.duration, false)
-                this.addImage()
-                // this.action()
-			}
-        }
+		// this.options = {
+        //     assets:[
+        //     ],
+		// 	oncomplete: () => {
+                
+        //         // this.action()
+		// 	}
+        // }
 
-        this.assets()
-        const preloader = new Loader(this.options)
+        // this.assets()
+        // const preloader = new Loader(this.options)
+
+        this.init()
+        this.loop()
+        this.menuHamburger()
+        this.openDiv(document.querySelectorAll('.js-projects'), 'q', document.querySelector('.js-projects-content'), 'back', this.model.duration, 'block')
+        this.openDiv(document.querySelectorAll('.js-contact'), 'd', document.querySelector('.js-contact-content'), 'dance', this.model.duration, 'flex')
+        this.openDiv(document.querySelectorAll('.js-home'), 'z', false, 'back', this.model.duration, false)
+        this.addImage()
 
     }
 
-    assets(){
-       this.character = this.model.load
-       this.model.animationsArray.forEach( model => this.options.assets.push(model))
-    }
+    // assets(){
+    //    this.character = this.model.load
+    //    this.model.animationsArray.forEach( model => this.options.assets.push(model))
+    // }
 
     init(){
 
@@ -88,7 +90,17 @@ class Museum {
          * Scene
          */
 		this.scene = new THREE.Scene()
-		this.scene.background = new THREE.Color( 0xa0a0a0 )
+        this.scene.background = new THREE.Color( 0xa0a0a0 )
+        
+        
+        // this.loading()
+        this.model.manager.onLoad = () => {document.querySelector('.loader').style.display = 'none'}
+        this.model.manager.onProgress = (url, itemsLoaded, itemsTotal) => 
+        {
+            console.log(itemsLoaded)
+            document.querySelector('.loader .js-pourcent').innerText = itemsLoaded + ' sur ' + itemsTotal + ' fichiers chargé' +( itemsLoaded > 1 ? 's.' : '.')
+            document.querySelector('.loader .js-pourcent-bar').style.transform = `scaleX(${itemsLoaded / 10})`
+        }
 
         /**
          * Light
@@ -116,12 +128,6 @@ class Museum {
          /**
          * Ground
          */
-
-        this.wall = new THREE.GridHelper(200, 40)
-        this.wall.rotation.set(0, Math.PI * 0.5, Math.PI * 0.5)
-        this.wall.position.z = -50
-        this.wall.position.y = 95
-        this.scene.add(this.wall)
 
         this.mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
         this.mesh.rotation.x = - Math.PI / 2;
@@ -179,18 +185,21 @@ class Museum {
         this.renderer.render(this.scene, this.camera)
     }
 
-    openDiv(button, key, divToOpen, animation, duration, display)
+    openDiv(buttons, key, divToOpen, animation, duration, display)
     {
-        const closeActiveContent = () => 
+        const closeActiveContent = (divOpen) => 
         {
-            if(divToOpen == false)
-            {
+            // if(divToOpen == false)
+            // {
                 let activeContent = document.querySelectorAll('.active')
                 for(const active of activeContent)
                 {
-                    active.classList.remove('active')
+                    if(divOpen != active)
+                    {
+                        active.classList.remove('active')
+                        active.style.display = 'none'
+                    }
                     // active.classList.add('desactive')
-                    active.style.display = 'none'
                     // if(active.classList.contains("desactive"))
                     // {
                     //     active.addEventListener('animationend', () =>
@@ -200,20 +209,22 @@ class Museum {
                     //     })
                     // }
                 }
-            }
+            // }
         }
-
-        button.addEventListener('click', () =>
+        for(const button of buttons)
         {
-            this.model.changeAnimation(animation)
-            if(divToOpen != false)
+            console.log(button)
+            button.addEventListener('click', () =>
             {
-                divToOpen.classList.add('active')
-                divToOpen.style.display = display
-            }
-            // console.log(duration)
-            closeActiveContent()
-        })
+                if(divToOpen != false)
+                {
+                    divToOpen.classList.add('active')
+                    divToOpen.style.display = display
+                }
+                // console.log(duration)
+                closeActiveContent(divToOpen)
+            })
+        }
 
         window.addEventListener('keypress', (_event) =>
         {
@@ -228,7 +239,7 @@ class Museum {
                         divToOpen.style.display = display
                     },this.model.model.duration * 1000)
                 }
-                closeActiveContent()
+                closeActiveContent(divToOpen)
             }
         })
     }
@@ -238,10 +249,35 @@ class Museum {
         const photo = new Image()
         photo.src = PhotoTest
         document.querySelector('.test').appendChild(photo)
+    }
 
+    menuHamburger()
+    {
+        const overlay = document.querySelector('.header__overlay')
+        const hamburgerButton = document.querySelector('.hamburger')
+        const overlayContent = document.querySelector('.overlay__content ul')
+        const headerContent = document.querySelector('header nav .nav__right ul')
+
+        overlayContent.innerHTML = headerContent.innerHTML
+
+        hamburgerButton.addEventListener('click', () =>
+        {
+            hamburgerButton.classList.toggle('is-active')
+
+            if(overlay.classList.contains('overlay-on'))
+            {
+                overlay.classList.remove('overlay-on')
+            }
+            else
+            {
+                overlay.classList.add('overlay-on')
+            }
+        })
     }
 }
 
 document.addEventListener("DOMContentLoaded", function(){
     const museum = new Museum()
 })
+
+

@@ -23,8 +23,9 @@ export default class Model
 
     init()
     {
-        this.loader = new FBXLoader()
-        this.loaderTest = new GLTFLoader()
+        this.manager = new THREE.LoadingManager()
+
+        this.loader = new FBXLoader(this.manager)
 
         this.loader.load(
             Belly,

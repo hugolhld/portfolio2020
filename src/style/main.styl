@@ -42,7 +42,9 @@ canvas
         height 1%
         background #fff
         // animation loadAnimation 5s
+        transform scaleX(0)
         transform-origin 0.0
+        transition .1s
 
 header
     display block
@@ -278,6 +280,11 @@ main
                 &:nth-child(1)
                     margin-block-start auto
 
+.hamburger
+    display none
+
+.header__overlay
+    display none
 
 
 
@@ -320,3 +327,136 @@ main
 //     90% {transform: scaleX(.35)}
 //     100% {transform: scaleX(1)}
 //     }
+
+// @media (max-width: 500px)
+//   .
+
+
+/* Hamburger */
+@media (max-width: 700px)
+    .nav__right ul
+        display none
+    .contact
+        overflow scroll
+        .contact__content
+            flex-direction column
+            margin-top 70% !important
+            .content__right
+                padding-left 0
+            .content__left
+                padding-right 0
+    .projects
+        article 
+            padding-top 20vh
+            height 70vh
+            flex-direction column
+            overflow scroll
+            .projects__content
+                flex-direction column
+                .content__bar
+                    width 75.5% !important
+                    height .1vh !important
+                    margin 5% !important
+
+    .hamburger {
+            padding: 15px 15px;
+            display: inline-block;
+            cursor: pointer;
+            transition-property: opacity, filter;
+            transition-duration: 0.15s;
+            transition-timing-function: linear;
+            font: inherit;
+            color: inherit;
+            text-transform: none;
+            background-color: transparent;
+            border: 0;
+            margin: 0;
+            overflow: visible; }
+            .hamburger:hover {
+            opacity: 0.7; }
+            .hamburger.is-active:hover {
+            opacity: 0.7; }
+            .hamburger.is-active .hamburger-inner,
+            .hamburger.is-active .hamburger-inner::before,
+            .hamburger.is-active .hamburger-inner::after {
+            background-color: #fff; }
+        
+        .hamburger-box {
+            width: 40px;
+            height: 24px;
+            display: inline-block;
+            position: relative; }
+        
+        .hamburger-inner {
+            display: block;
+            top: 50%;
+            margin-top: -2px; }
+            .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+            width: 40px;
+            height: 4px;
+            background-color: #fff;
+            border-radius: 4px;
+            position: absolute;
+            transition-property: transform;
+            transition-duration: 0.15s;
+            transition-timing-function: ease; }
+            .hamburger-inner::before, .hamburger-inner::after {
+            content: "";
+            display: block; }
+            .hamburger-inner::before {
+            top: -10px; }
+            .hamburger-inner::after {
+            bottom: -10px; }
+        
+            .hamburger--3dy .hamburger-box {
+                perspective: 80px; }
+            
+            .hamburger--3dy .hamburger-inner {
+                transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1); }
+                .hamburger--3dy .hamburger-inner::before, .hamburger--3dy .hamburger-inner::after {
+                transition: transform 0s 0.1s cubic-bezier(0.645, 0.045, 0.355, 1); }
+            
+            .hamburger--3dy.is-active .hamburger-inner {
+                background-color: transparent !important;
+                transform: rotateX(-180deg); }
+                .hamburger--3dy.is-active .hamburger-inner::before {
+                transform: translate3d(0, 10px, 0) rotate(45deg); }
+                .hamburger--3dy.is-active .hamburger-inner::after {
+                transform: translate3d(0, -10px, 0) rotate(-45deg); }
+
+    .header__overlay
+        width: 100%;
+        background: #000;
+    
+    .overlay__content 
+        width 100%
+        margin -18px 0
+        ul
+            padding-left 0
+            list-style none
+            display flex
+            flex-direction column
+            li
+                width 100%
+                text-align center
+                display block
+                border-bottom 1px solid #fff
+                &:last-child
+                    border-bottom none
+                button
+                    width 100%
+                    height 100px
+                    position relative
+                    -webkit-appearance none
+                    background none
+                    font-size 1em
+                    border none
+                    color #fff
+                    &:focus
+                        outline none
+
+    .overlay-on
+        display: flex !important;
+        position: absolute;
+        transition: .5s;
+
