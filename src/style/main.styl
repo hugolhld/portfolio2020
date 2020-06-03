@@ -24,8 +24,26 @@ canvas
     width 100%
     z-index 5
 
+.preloader
+    width 100vw
+    height 100vh
+    position absolute
+    color white
+    top 0
+    display flex
+    align-items center
+    justify-content center
+    font-size 3em
+    .point__first
+        animation test 2s infinite
+    .point__second
+        animation test 2s infinite
+        animation-delay .66666s
+    .point__three
+        animation test 2s infinite
+        animation-delay 1.333s
+
 .loader
-    // display none
     display flex
     width 100vw
     height 100vh
@@ -73,6 +91,10 @@ header
             border none
             color #fff
             cursor pointer
+            &:after
+                width 0
+                animation underlineAnimationNone .5s
+                transform-origin 1
             &:hover:after
                 content ' '
                 position absolute
@@ -81,6 +103,7 @@ header
                 top 100%
                 left -10%
                 background #fff
+                transform-origin 0.0
                 animation underlineAnimation .5s
             &:focus
                 outline none
@@ -171,11 +194,31 @@ main
     article 
         width 100vw
         height 100vh
+        position relative
         display flex
         align-items center
         justify-content center
         color #fff
         background #000
+        &:first-child
+            .projects__button
+                justify-content flex-end
+        .projects__button
+            width 60%
+            margin 0 auto
+            position absolute
+            bottom 10%
+            display flex
+            justify-content space-between
+            a
+                color #fff
+                padding 20px 30px
+                border 1px solid #fff
+                text-decoration none
+                transition .3s
+                &:hover
+                    background #fff
+                    color #000
         .projects__content
             width 90%
             display flex
@@ -219,6 +262,35 @@ main
                         background #fff
                         color #000
 
+.about
+    width 100vw
+    display none
+    position absolute
+    background #000
+    .about__content
+        width 90%
+        height 100vh
+        margin 0 auto
+        background #000
+        display flex
+        align-items center
+        justify-content space-between
+        color #fff
+        .content__left
+            width 20vw
+            height 20vw
+            border 1px solid #FFF
+            border-radius 50%
+            overflow hidden
+            img
+                width 100%
+        .content__bar
+            width 20vw
+            height .1vh
+            background #fff
+        .content__right
+            text-align center
+            width 30vw
 .contact
     height 100vh
     display none
@@ -280,20 +352,48 @@ main
                 &:nth-child(1)
                     margin-block-start auto
 
+footer
+    position fixed
+    bottom 0
+    background #000
+    color #fff
+    width 100vw
+    display flex
+    justify-content space-evenly
+    font-size 1em
+    border-top 1px solid #fff
+    padding-top 5px
+    p
+        margin-block-end 0
+        margin-block-start 0
+    a
+        color #fff
+        transition .3s
+        &:hover
+            color #8e8e8e
+
+.message
+    padding 10px 15px
+    margin 10px
+
+.message.error
+    background pink
+
+
+.message.success
+    background greenyellow
+
 .hamburger
     display none
 
 .header__overlay
     display none
 
-
-
 .active
     display block
     animation opacity .7s
 
 .desactive
-    // display none
     animation desactivate .7s
 
 @keyframes opacity {
@@ -314,11 +414,14 @@ main
     from {transform: scaleX(0)}
     to {transform: scaleX(1)}
     }
+@keyframes underlineAnimationNone{
+    from {transform: scaleX(1)}
+    to {transform: scaleX(0)}
+    }
 
 @keyframes test{
-    0% {transform: scaleY(1)}
-    50% {transform: scaleY(0) scaleX(1) }
-    100% {transform: scaleY(0.001) scaleX(3); background: #fff}
+    0%,100% {opacity: 0}
+    60% {opacity: 1}
     }
 
 // @keyframes loadAnimation{
@@ -331,9 +434,25 @@ main
 // @media (max-width: 500px)
 //   .
 
+.mobile
+    display none
+    width 100vw
+    height 100vh
+    position absolute
+    top 0
+    color white
+    background #000
+    justify-content center
+    align-items center
+    font-size 2em
+    text-align center
+    z-index 10000
+
 
 /* Hamburger */
 @media (max-width: 700px)
+    .mobile
+        display flex
     .nav__right ul
         display none
     .contact

@@ -63,7 +63,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|jpg|gif|svg)$/,
+                test: /\.(png|jpg|jpg|gif|svg|jpeg)$/,
                 use: 
                 [
                     {

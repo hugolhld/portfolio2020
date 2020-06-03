@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import Belly from '../model/SambaCharacter.fbx'
-import Punch from '../model/Punching.fbx'
+import Character from '../model/character.fbx'
+import Belly from '../model/Bellydancing.fbx'
+import Salsa from '../model/Salsa.fbx'
 import LookingAround from '../model/looking.fbx'
 import Backflip from '../model/Backflip.fbx'
 
@@ -17,7 +17,7 @@ export default class Model
         this.duration
         this.person
         this.clock = new THREE.Clock()
-        this.animationsArray = [Punch, LookingAround, Backflip]
+        this.animationsArray = [Salsa, LookingAround, Backflip, Belly]
         this.init()
     }
 
@@ -28,14 +28,13 @@ export default class Model
         this.loader = new FBXLoader(this.manager)
 
         this.loader.load(
-            Belly,
+            Character,
             (_fbx) =>
             {
 
                 this.model.object = _fbx
 
                 this.model.mixer = new THREE.AnimationMixer(this.model.object)
-                // console.log(this.model.mixer);
 
                 this.model.root = this.model.mixer.getRoot()
 
@@ -67,7 +66,7 @@ export default class Model
             model =>
             {
                 this.model[animation] = model.animations[0]
-                console.log(model)
+                
                 if(this.animationsArray.length > 0) this.addAnimations(loader)
                 else
                 {
@@ -105,6 +104,16 @@ export default class Model
         if(animation == 'dance')
         {
             this.action = 'dance'
+        }
+        
+        if(animation == 'salsa')
+        {
+            this.action = Salsa
+        }
+
+        if(animation == 'belly')
+        {
+            this.action = Belly
         }
 
         setTimeout(() =>

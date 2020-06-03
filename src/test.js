@@ -1,56 +1,74 @@
 import './style/main.styl'
 import * as THREE from 'three'
 import Model from './js/model.js'
-import PhotoTest from './images/test.png'
-// import Loader from './js/Loader.js'
+import hugoIoPhoto from './images/test.png'
+import cannellePhoto from './images/cannelle.png'
+import catacombPhoto from './images/catacomb.png'
+import ecosurfPhoto from './images/ecosurf.png'
+import hlDetaillingPhoto from './images/hl-detailling.png'
+import matrixPhoto from './images/matrix.png'
+import pokedexPhoto from './images/pokedex.png'
+import hugoPhoto from './images/hugo.jpeg'
 
-class Museum {
+class Portfolio {
     constructor(){
 
-            this.model = new Model
-            this.scene
-            this.wall
-            this.mesh
-            this.ground
-            this.camera
-            this.renderer
-            this.controls
-            this.sizes = {}
-            this.cursor = {}
-            this.instructionDiv = document.querySelector('.instruction')
-            this.instructionContent = document.querySelector('.instruction__content')
-            this.instructionButton = document.querySelector('.instruction__content button')
+        this.model = new Model
+        this.scene
+        this.wall
+        this.mesh
+        this.ground
+        this.camera
+        this.renderer
+        this.controls
+        this.sizes = {}
+        this.cursor = {}
+        this.loadingDiv
+        this.instructionDiv = document.querySelector('.instruction')
+        this.instructionContent = document.querySelector('.instruction__content')
+        this.instructionButton = document.querySelector('.instruction__content button')
 
-        /* this.container = document.createElement( 'div' )
-        this.container.style.height = '100%'
-        document.body.appendChild( this.container ) */
-
-		// this.options = {
-        //     assets:[
-        //     ],
-		// 	oncomplete: () => {
-                
-        //         // this.action()
-		// 	}
-        // }
-
-        // this.assets()
-        // const preloader = new Loader(this.options)
-
+        this.loading()
         this.init()
         this.loop()
         this.menuHamburger()
         this.openDiv(document.querySelectorAll('.js-projects'), 'q', document.querySelector('.js-projects-content'), 'back', this.model.duration, 'block')
-        this.openDiv(document.querySelectorAll('.js-contact'), 'd', document.querySelector('.js-contact-content'), 'dance', this.model.duration, 'flex')
+        this.openDiv(document.querySelectorAll('.js-about'), 's', document.querySelector('.js-about-content'), 'salsa', this.model.duration, 'block')
+        this.openDiv(document.querySelectorAll('.js-contact'), 'd', document.querySelector('.js-contact-content'), 'belly', this.model.duration, 'flex')
         this.openDiv(document.querySelectorAll('.js-home'), 'z', false, 'back', this.model.duration, false)
+        this.openDiv(document.querySelectorAll('.nav__home'), 'z', false, 'back', this.model.duration, false)
         this.addImage()
 
     }
 
-    // assets(){
-    //    this.character = this.model.load
-    //    this.model.animationsArray.forEach( model => this.options.assets.push(model))
-    // }
+    loading()
+    {
+        this.loadingDiv = document.createElement('div')
+        this.loadingDiv.classList.add('preloader')
+        
+        const loadingText = document.createElement('p')
+        loadingText.innerText = 'Chargement'
+
+        const loadingPoint0 = document.createElement('span')
+        loadingPoint0.innerText = '.'
+        loadingPoint0.classList.add('point__first')
+        
+        const loadingPoint1 = document.createElement('span')
+        loadingPoint1.innerText = '.'
+        loadingPoint1.classList.add('point__second')
+
+        
+        const loadingPoint2 = document.createElement('span')
+        loadingPoint2.innerText = '.'
+        loadingPoint2.classList.add('point__three')
+
+
+        document.querySelector('main').appendChild(this.loadingDiv)
+        this.loadingDiv.appendChild(loadingText)
+        loadingText.appendChild(loadingPoint0)
+        loadingText.appendChild(loadingPoint1)
+        loadingText.appendChild(loadingPoint2)
+    }
 
     init(){
 
@@ -91,13 +109,14 @@ class Museum {
          */
 		this.scene = new THREE.Scene()
         this.scene.background = new THREE.Color( 0xa0a0a0 )
-        
-        
-        // this.loading()
+
+        /** 
+         *  Loader
+        */
         this.model.manager.onLoad = () => {document.querySelector('.loader').style.display = 'none'}
         this.model.manager.onProgress = (url, itemsLoaded, itemsTotal) => 
         {
-            console.log(itemsLoaded)
+            this.loadingDiv.style.display = 'none'
             document.querySelector('.loader .js-pourcent').innerText = itemsLoaded + ' sur ' + itemsTotal + ' fichiers chargé' +( itemsLoaded > 1 ? 's.' : '.')
             document.querySelector('.loader .js-pourcent-bar').style.transform = `scaleX(${itemsLoaded / 10})`
         }
@@ -175,13 +194,8 @@ class Museum {
     
         window.requestAnimationFrame( () => this.loop() )
 
-
         this.model.loop()
-        // controls.update
 
-        // console.log(model.animations)
-
-        // Render
         this.renderer.render(this.scene, this.camera)
     }
 
@@ -189,31 +203,20 @@ class Museum {
     {
         const closeActiveContent = (divOpen) => 
         {
-            // if(divToOpen == false)
-            // {
-                let activeContent = document.querySelectorAll('.active')
-                for(const active of activeContent)
+
+            let activeContent = document.querySelectorAll('.active')
+            for(const active of activeContent)
+            {
+                if(divOpen != active)
                 {
-                    if(divOpen != active)
-                    {
-                        active.classList.remove('active')
-                        active.style.display = 'none'
-                    }
-                    // active.classList.add('desactive')
-                    // if(active.classList.contains("desactive"))
-                    // {
-                    //     active.addEventListener('animationend', () =>
-                    //     {
-                    //         active.classList.remove('desactive')
-                    //         console.log("bruh")
-                    //     })
-                    // }
+                    active.classList.remove('active')
+                    active.style.display = 'none'
                 }
-            // }
+            }
         }
+
         for(const button of buttons)
         {
-            console.log(button)
             button.addEventListener('click', () =>
             {
                 if(divToOpen != false)
@@ -246,9 +249,37 @@ class Museum {
 
     addImage()
     {
-        const photo = new Image()
-        photo.src = PhotoTest
-        document.querySelector('.test').appendChild(photo)
+        const hugo = new Image()
+        hugo.src = hugoPhoto
+        document.querySelector('.js-about-content .about__content .content__left').appendChild(hugo)
+
+        const hugoIO = new Image()
+        hugoIO.src = hugoIoPhoto
+        document.querySelector('#hugoio .projects__content .content__left').appendChild(hugoIO)
+        
+        const cannelle = new Image()
+        cannelle.src = cannellePhoto
+        document.querySelector('#portfolio .projects__content .content__left').appendChild(cannelle)
+      
+        const catacomb = new Image()
+        catacomb.src = catacombPhoto
+        document.querySelector('#catacomb .projects__content .content__left').appendChild(catacomb)
+        
+        const ecosurf = new Image()
+        ecosurf.src = ecosurfPhoto
+        document.querySelector('#ecosurf .projects__content .content__left').appendChild(ecosurf)
+        
+        const hlDetailling = new Image()
+        hlDetailling.src = hlDetaillingPhoto
+        document.querySelector('#hl-detailling .projects__content .content__left').appendChild(hlDetailling)
+        
+        const matrix = new Image()
+        matrix.src = matrixPhoto
+        document.querySelector('#matrix .projects__content .content__left').appendChild(matrix)
+        
+        const pokedex = new Image()
+        pokedex.src = pokedexPhoto
+        document.querySelector('#pokedex .projects__content .content__left').appendChild(pokedex)
     }
 
     menuHamburger()
@@ -277,7 +308,7 @@ class Museum {
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-    const museum = new Museum()
+    const portfolio = new Portfolio()
 })
 
 
