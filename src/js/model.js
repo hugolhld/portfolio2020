@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
-import Character from '../model/character.fbx'
+import Character from '../model/Chracter.fbx'
 import Belly from '../model/Bellydancing.fbx'
 import Salsa from '../model/Salsa.fbx'
 import LookingAround from '../model/looking.fbx'
@@ -31,7 +31,6 @@ export default class Model
             Character,
             (_fbx) =>
             {
-
                 this.model.object = _fbx
 
                 this.model.mixer = new THREE.AnimationMixer(this.model.object)
@@ -46,6 +45,7 @@ export default class Model
                 } )
 
                 this.model.object.scale.set(0.05,0.05,0.05)
+                // this.model.object.postion.set(5, 5, 5)
                 this.model.object.position.y = -7
 
                 this.model.dance = this.model.object.animations[0]

@@ -175,6 +175,8 @@ class Portfolio {
 
     }
 
+
+
     /**
      * Resize
      */
